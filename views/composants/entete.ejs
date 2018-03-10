@@ -6,9 +6,16 @@
         </div>
         <nav> 
             <ul>
-                <li><a href='/'>Accueil</a></li>
-                <li><a href='/list'>Membres</a></li>
-                <li><a href='/chat'>Clavardage</a></li>
+                <li><a href='/'><%= __('navAccueil') %></a></li>
+                <li><a href='/list'><%= __('navMembres') %></a></li>
+                <li><a href='/chat'><%= __('clavardage') %></a></li>
+                <li>
+                <% if(getLocale()=='fr') { %>
+                    <a href='/en'>En</a>
+                <% } if (getLocale()=='en') {%>
+                    <a href='/fr'>Fr</a>
+                <% } %>
+                </li>
             </ul>
         </nav> 
     </div>

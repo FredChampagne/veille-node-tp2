@@ -31,9 +31,19 @@ app.use(i18n.init);
 let util = require("util");
 
 //////////////////////////////// ROUTES /////////////////////////////////
+app.get('/:locale(fr|en)', (req, res) => {
+	let locale = req.params.locale;
+    req.setLocale(req.params.locale);
+	res.cookie('langueChoisie', req.params.locale);
+    res.redirect(req.headers.referer);
+})
 
 // Affichage de l'accueil (root)
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
+	if (req.cookies.langueChoisie == null) {
+		res.cookie('langueChoisie', 'fr');
+		req.setLocale('fr');
+	}
 	res.render('accueil.ejs');
 })
 

@@ -1,11 +1,11 @@
 <!-- Actions en lien avec la liste des membres -->
 <div class="zone-action">
     <ul>
-        <li><a href='/vider'><i class="fas fa-trash"></i>Vider la liste</a></li>
-        <li><a href='/peupler'><i class="fas fa-users"></i>Peupler la liste</a></li>
+        <li><a href='/vider'><i class="fas fa-trash"></i><%= __('navVider') %></a></li>
+        <li><a href='/peupler'><i class="fas fa-users"></i><%= __('navPeupler') %></a></li>
     </ul>
     <form class='form_recherche' action="/rechercher" name='form_recherche' id='form_recherche' method="POST" >
-        <input type="text" name="chaine" placeholder="Rechercher un membre">
-        <input type="submit" value="Rechercher">
+        <input type="text" name="chaine" placeholder="<%= __('rechercherMembre') %>">
+        <input type="submit" value="<%= __('rechercher') %>">
     </form>
 </div>

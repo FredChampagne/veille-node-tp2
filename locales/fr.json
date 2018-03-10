@@ -1,1 +1,18 @@
-{}
+{
+	"titreSite": "Gestion des membres",
+	"bienvenue": "Bienvenue sur l'application",
+	"btnVoirMembres": "Voir les membres",
+	"navAccueil": "Accueil",
+	"navVider": "Vider la liste",
+	"navPeupler": "Peupler la liste",
+    "navMembres": "Membres",
+    "clavardage": "Clavardage",
+    "listeMembres": "Liste des membres",
+    "rechercherMembre": "Rechercher un membre",
+    "rechercher":"Rechercher",
+    "profil": "Profil",
+    "nom": "Nom",
+    "prenom": "Prénom",
+    "courriel": "Courriel",
+    "telephone": "Téléphone"
+}

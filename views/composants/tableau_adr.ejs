@@ -10,11 +10,11 @@ if(typeof ordre != 'undefined'){
 <div class="conteneur-tableau">
     <table class="tableau">
         <tr>
-            <th>Profil</th>
-            <th><a href='/trier/prenom/<%= tri %>'>Prenom</a></th>
-            <th><a href='/trier/nom/<%= tri %>'>Nom</a></th> 
-            <th><a href='/trier/telephone/<%= tri %>'>Telephone</a></th>
-            <th><a href='/trier/courriel/<%= tri %>'>Courriel</a></th>
+            <th><%= __('profil') %></th>
+            <th><a href='/trier/prenom/<%= tri %>'><%= __('prenom') %></a></th>
+            <th><a href='/trier/nom/<%= tri %>'><%= __('nom') %></a></th> 
+            <th><a href='/trier/telephone/<%= tri %>'><%= __('telephone') %></a></th>
+            <th><a href='/trier/courriel/<%= tri %>'><%= __('courriel') %></a></th>
             <th><a href='/trier/id/<%= tri %>'>ID</a></th>
         </tr>
         <% adresses.forEach(elm => {%>

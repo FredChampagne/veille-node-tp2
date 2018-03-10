@@ -1,1 +1,18 @@
-{}
+{
+	"titreSite": "Member management",
+	"bienvenue": "Welcome to the application",
+	"btnVoirMembres": "See members",
+	"navAccueil": "Home",
+	"navVider": "Drop the list",
+	"navPeupler": "Populate the list",
+    "navMembres": "Members",
+    "clavardage": "Chat",
+    "listeMembres": "List members",
+    "rechercherMembre": "Search a member",
+    "rechercher": "Search",
+    "profil": "Profile",
+    "nom": "Last Name",
+    "prenom": "First Name",
+    "courriel": "Email",
+    "telephone": "Phone"
+}
