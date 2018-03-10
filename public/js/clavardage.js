@@ -1,9 +1,9 @@
 /* 
-  Pour établir une communication socket il faut un premier appel de
-   la fonction io()
-   Cette fonction est incluse dans la librairie socket.io. 
-   Cette fonction déclenche un événement connect vers le serveur
-   */
+Pour établir une communication socket il faut un premier appel de
+la fonction io()
+Cette fonction est incluse dans la librairie socket.io. 
+Cette fonction déclenche un événement connect vers le serveur
+*/
 let socket;
 window.onload = () => {
     socket = io();
