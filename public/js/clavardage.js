@@ -41,9 +41,14 @@ window.onload = () => {
  * Enregistre l'utilisateur entré dans le champs de texte approprié
 */
 function enregistrement() {
-    var elmUser = document.querySelector('#enregistrement input');
-    // l'événement « setUser » est transmit avec un objet contenant le nom de l'utilisateur
-    socket.emit('setUser', { user: elmUser.value });
+    let elmUser = document.querySelector('#enregistrement input');
+    let elmErreurEnreg = document.getElementById('erreur_enreg');
+    if (elmUser.value == "") {
+        elmErreurEnreg.style.display = "block";
+    } else {
+        // l'événement « setUser » est transmit avec un objet contenant le nom de l'utilisateur
+        socket.emit('setUser', { user: elmUser.value });
+    }
 }
 /**
  * Transmet le message entré dans le champs de texte approprié
