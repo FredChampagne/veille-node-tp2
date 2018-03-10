@@ -1,0 +1,17 @@
+<!-- Informations du membre -->
+<h1>Profil du membre</h1>
+<div class="info-membre">
+    <p>
+        <i class="fas fa-user"></i><%= membre.prenom %> <%= membre.nom %>
+        <% if(membre.ville != "") { %> 
+        </br>
+        <i class="fas fa-map-marker"></i><%= membre.ville %>
+        <% } if(membre.courriel != "") { %>
+        </br>
+        <i class="fas fa-envelope"></i><%= membre.courriel %>
+        <% } if(membre.telephone != "") { %>
+        </br>
+        <i class="fas fa-phone"></i><%= membre.telephone %>
+        <% } %>
+    </p>
+</div>

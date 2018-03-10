@@ -1,0 +1,33 @@
+{
+  "name": "tp1",
+  "version": "1.0.0",
+  "description": "Tp1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FredChampagne/veille-node-tp1.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "ejs",
+    "mongodb"
+  ],
+  "author": "Frédéric Champagne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FredChampagne/veille-node-tp1/issues"
+  },
+  "homepage": "https://github.com/FredChampagne/veille-node-tp1#readme",
+  "dependencies": {
+    "body-parser": "file:node_modules/body-parser",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongodb": "^3.0.2",
+    "multer": "^1.3.0"
+  }
+}

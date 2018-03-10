@@ -1,0 +1,31 @@
+<!-- Permet de récupérer l'ordre -->
+<% let tri;
+if(typeof ordre != 'undefined'){ 
+      tri = ordre 
+    }else{
+      tri = 'asc';
+    }
+%> 
+<!-- Tableau contenant les membres -->
+<div class="conteneur-tableau">
+    <table class="tableau">
+        <tr>
+            <th>Profil</th>
+            <th><a href='/trier/prenom/<%= tri %>'>Prenom</a></th>
+            <th><a href='/trier/nom/<%= tri %>'>Nom</a></th> 
+            <th><a href='/trier/telephone/<%= tri %>'>Telephone</a></th>
+            <th><a href='/trier/courriel/<%= tri %>'>Courriel</a></th>
+            <th><a href='/trier/id/<%= tri %>'>ID</a></th>
+        </tr>
+        <% adresses.forEach(elm => {%>
+            <tr>
+                <td><a href="/profil/<%= elm._id %>"><i class="fas fa-user"></i></a></td>
+                <td><%= elm.prenom %></td>
+                <td><%= elm.nom %></td>
+                <td><%= elm.telephone %></td>
+                <td><%= elm.courriel %></td>
+                <td><%= elm._id %></td>
+            </tr>
+        <% }) %>
+    </table>
+</div>

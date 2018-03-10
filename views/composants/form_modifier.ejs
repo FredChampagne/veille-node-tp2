@@ -1,0 +1,33 @@
+<!-- Formulaire qui permet de modifier un membre sur sa page profil -->
+<h2>Éditer les informations</h2>
+<form class='form_modif' action="/modifier" name='form_modif' id='form_modif' method="POST" >
+    <input type = "hidden" name = "_id" value = "<%= membre._id %>"> 
+    <div class="deux-colonnes">
+        <div>
+            <label for="nom"> Prénom </label>
+            <input type = "text" value="<%= membre.prenom %>" name = "prenom">
+        </div>
+        <div>
+            <label for="nom"> Nom </label>
+            <input type = "text" value="<%= membre.nom %>" name = "nom">
+        </div>
+    </div>
+    <div class="deux-colonnes">
+        <div>
+            <label for="nom"> Ville </label>
+            <input type = "text" value="<%= membre.ville %>" name = "ville">
+        </div>
+        <div>
+            <label for="nom"> Téléphone </label>
+            <input type = "text" value="<%= membre.telephone %>" name = "telephone">
+        </div>
+    </div>
+    <div class="solo">
+        <label for="nom"> Courriel </label>
+        <input type = "text" value="<%= membre.courriel %>" name = "courriel">
+    </div>
+    <div class="deux-colonnes boutons">
+        <input class="bouton" type="submit" value='Modifier'>
+        <a class="bouton" href="/detruire/<%= membre._id %>">Supprimer</a>
+    </div>
+</form>

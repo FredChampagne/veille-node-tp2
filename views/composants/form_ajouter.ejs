@@ -1,0 +1,32 @@
+<h2>Ajouter un membre</h2>
+<!-- Formulaire qui permet d'ajouter un membre -->
+<form class='form_ajout' action="/ajouter" name='form_ajout' id='form_ajout' method="POST" >
+    <input type = "hidden" name = "_id" value = ""> 
+    <div class="deux-colonnes">
+        <div>
+            <label for="prenom">Prénom :*</label>
+            <input type = "text" placeholder="Prénom" name = "prenom" required>
+        </div>
+        <div>
+            <label for="nom">Nom :*</label>
+            <input type = "text" placeholder="Nom" name = "nom" required> 
+        </div>
+    </div>
+    <div class="deux-colonnes">
+        <div>
+            <label for="ville">Ville :</label>
+            <input type = "text" placeholder="Ville" name = "ville">
+        </div>
+        <div>
+            <label for="nom">Téléphone :</label>
+            <input type = "text" placeholder="Téléphone" name = "telephone">
+        </div>
+    </div>
+    <div class="solo">
+        <label for="nom">Courriel :</label>
+        <input type = "text" placeholder="Courriel" name = "courriel">
+    </div>
+    <div>
+        <input class="bouton" type="submit" value='Ajouter'>
+    </div>
+</form>
