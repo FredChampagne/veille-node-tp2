@@ -2,21 +2,45 @@
 "use strict";
 const express = require('express');
 const app = express();
-app.use(express.static('public'));
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 const ObjectID = require('mongodb').ObjectID;
+const cookieParser = require('cookie-parser');
+const i18n = require("i18n");
 const peupler = require("./mes_modules/peupler");
+
+// Permet d'ajouter la librairie socket.io
+const server = require('http').createServer(app);
+const io = require('./mes_modules/chat_socket').listen(server);
+
+// Configuration du multilingue
+i18n.configure({ 
+	locales : ['fr', 'en'],
+	cookie : 'langueChoisie',
+	directory : __dirname + '/locales' 
+})
 
 // Associe le moteur de vue au module «ejs» 
 app.set('view engine', 'ejs'); // Générateur de template 
+
+// Utilisation
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(i18n.init);
 let util = require("util");
+
+//////////////////////////////// ROUTES /////////////////////////////////
 
 // Affichage de l'accueil (root)
 app.get('/', function (req, res) {
 	res.render('accueil.ejs');
 })
+
+// Affichage du chat
+app.get('/chat', function (req, res) {
+	res.render('socket_vue.ejs')
+});
 
 // Affichage de la liste
 app.get('/list', function (req, res) {
@@ -132,7 +156,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017', (err, database) => {
 	if (err) return console.log(err)
 	db = database.db('carnet_adresse')
 	// lancement du serveur Express sur le port 8081
-	app.listen(8081, () => {
+	server.listen(8081, () => {
 		console.log('connexion à la BD et on écoute sur le port 8081')
 	})
 })

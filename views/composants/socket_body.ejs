@@ -1,0 +1,35 @@
+<h2>Clavardage</h2>
+<section id="enregistrement">
+    <p>Veuillez vous enregistrer pour utiliser le chat</p>
+    <input type="text">
+    <button onclick="enregistrement()">Enregistrement</button>
+</section>
+<section id="chat" style="display:none">
+    <div id="log"></div>
+    <table id="list_user">
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Affiche les utilisateurs -->
+        </tbody>
+    </table>
+    <table id="message">
+        <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Affiche les messages -->
+        </tbody>
+    </table>
+    <div id="message_a_transmettre">
+        <textarea id="txtMessage"></textarea>
+        <button onclick="transmettre()">Transmettre</button>
+    </div>
+</section>
