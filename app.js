@@ -50,12 +50,12 @@ app.get('/', (req, res) => {
 })
 
 // Affichage du chat
-app.get('/chat', function (req, res) {
+app.get('/chat', (req, res) => {
 	res.render('socket_vue.ejs')
 });
 
 // Affichage de la liste
-app.get('/list', function (req, res) {
+app.get('/list', (req, res) => {
 	let cursor = db.collection('adresse').find().toArray((err, resultat) => {
 		if (err) return console.log(err)
 		res.render('adresses.ejs', { adresses: resultat })
@@ -63,7 +63,7 @@ app.get('/list', function (req, res) {
 })
 
 // Accède au profil d'un membre
-app.get('/profil/:id', function (req, res) {
+app.get('/profil/:id', (req, res) => {
 	let id = req.params.id;
 	let critere = ObjectID(id);
 	let cursor = db.collection('adresse').findOne({ "_id": critere }, (err, resultat) => {
@@ -73,7 +73,8 @@ app.get('/profil/:id', function (req, res) {
 })
 
 // Modifie un membre et l'affiche
-app.post('/modifier', function (req, res) {
+app.post('/modifier-profil-ajax', (req, res) => {
+	console.log(req.body);
 	let id = ObjectID(req.body['_id'])
 	let oModif = {
 		"_id": id,
@@ -86,12 +87,15 @@ app.post('/modifier', function (req, res) {
 	db.collection('adresse').save(oModif, (err, resultat) => {
 		if (err) return console.log(err)
 		console.log('sauvegarder dans la BD')
-		res.redirect('/profil/' + id)
+		res.send({
+			oModif,
+			msg: "Profil mis à jour"
+		});
 	})
 });
 
 // Modifie un membre et l'affiche
-app.post('/modifier-ajax', function (req, res) {
+app.post('/modifier-ajax', (req, res) => {
 	let id = ObjectID(req.body.id)
 	let oModif = {
 		"_id": id,
@@ -171,10 +175,11 @@ app.post('/detruire-ajax', (req, res) => {
 	let id = ObjectID(req.body.id);
 	let prenom = req.body.prenom;
 	let nom = req.body.nom;
-	db.collection('adresse').findOneAndDelete({
-		_id: id
-	}, (err, resultat) => {
-		res.send({ id: id, msg: prenom + " " + nom + " a été correctement supprimé" });
+	db.collection('adresse').findOneAndDelete({_id: id}, (err, resultat) => {
+		res.send({ 
+			id: id, 
+			msg: prenom + " " + nom + " - Membre supprimé" 
+		});
 	});
 });
 

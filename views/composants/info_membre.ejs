@@ -1,17 +1,18 @@
 <!-- Informations du membre -->
 <h1><%= __('profilMembre') %></h1>
+<p id="majAjax"></p>
 <div class="info-membre">
     <p>
-        <i class="fas fa-user"></i><%= membre.prenom %> <%= membre.nom %>
+         <i class="fas fa-user"></i><span class="prenom"><%= membre.prenom %></span> <span class="nom"><%= membre.nom %></span>
         <% if(membre.ville != "") { %> 
         </br>
-        <i class="fas fa-map-marker"></i><%= membre.ville %>
+        <i class="fas fa-map-marker"></i><span class="ville"><%= membre.ville %></span>
         <% } if(membre.courriel != "") { %>
         </br>
-        <i class="fas fa-envelope"></i><%= membre.courriel %>
+        <i class="fas fa-envelope"></i><span class="courriel"><%= membre.courriel %></span>
         <% } if(membre.telephone != "") { %>
         </br>
-        <i class="fas fa-phone"></i><%= membre.telephone %>
+        <i class="fas fa-phone"></i><span class="telephone"><%= membre.telephone %></span>
         <% } %>
     </p>
 </div>
