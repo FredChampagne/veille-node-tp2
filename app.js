@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 const ObjectID = require('mongodb').ObjectID;
 const cookieParser = require('cookie-parser');
 const i18n = require("i18n");
-const $ = require('jQuery');
+const $ = require('jquery');
 const peupler = require("./mes_modules/peupler");
 
 // Permet d'ajouter la librairie socket.io
@@ -29,6 +29,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(i18n.init);
+app.use('/jquery', express.static('./node_modules/jquery/dist/'));
 let util = require("util");
 
 //////////////////////////////// ROUTES /////////////////////////////////
@@ -122,7 +123,7 @@ app.post('/rechercher', (req, res) => {
 	})
 });
 
-// Supprime une adresse
+// Supprime un membre à partir du profil membre
 app.get('/detruire/:id', (req, res) => {
 	let id = req.params.id;
 	let critere = ObjectID(id);
@@ -130,6 +131,16 @@ app.get('/detruire/:id', (req, res) => {
 		if (err) return console.log(err)
 		res.redirect('/list');
 	})
+});
+
+// Supprime directement dans le tableau des membres et envoie l'id
+app.post('/detruire-ajax', (req,res)=>{
+    let id = ObjectID(req.body.id);
+    db.collection('adresse').findOneAndDelete({
+        _id: id
+    }, (err, resultat) => {
+        res.send(id);
+    });
 });
 
 // Tri les adresses

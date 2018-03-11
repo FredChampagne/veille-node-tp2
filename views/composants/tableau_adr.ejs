@@ -19,16 +19,26 @@ if(typeof ordre != 'undefined'){
             <th><%= __('supprimer') %></th>
             <th><%= __('modifier') %></th>
         </tr>
+        <tr class="gabarit">
+            <td><a href=""><i class="fas fa-user"></i></a></td>
+            <td class="prenom" contenteditable="true"></td>
+            <td class="nom" contenteditable="true"></td>
+            <td class="telephone" contenteditable="true"></td>
+            <td class="courriel" contenteditable="true"></td>
+            <td class="identifiant"></td>
+            <td><a href="#" class="supprimer"><i class="fas fa-trash"></i></a></td>
+            <td><a href="#" class='sauver'><i class="fas fa-save"></i></a></td>
+        </tr>
         <% adresses.forEach(elm => {%>
             <tr>
                 <td><a href="/profil/<%= elm._id %>"><i class="fas fa-user"></i></a></td>
-                <td contenteditable="true"><%= elm.prenom %></td>
-                <td contenteditable="true"><%= elm.nom %></td>
-                <td contenteditable="true"><%= elm.telephone %></td>
-                <td contenteditable="true"><%= elm.courriel %></td>
-                <td><%= elm._id %></td>
-                <td><a href="/detruire/<%= elm._id %>"><i class="fas fa-trash"></i></a></td>
-                <td><a class='sauver' href="#"><i class="fas fa-save"></i></a></td>
+                <td class="prenom" contenteditable="true"><%= elm.prenom %></td>
+                <td class="nom" contenteditable="true"><%= elm.nom %></td>
+                <td class="telephone" contenteditable="true"><%= elm.telephone %></td>
+                <td class="courriel" contenteditable="true"><%= elm.courriel %></td>
+                <td class="identifiant"><%= elm._id %></td>
+                <td><a href="#" class="supprimer"><i class="fas fa-trash"></i></a></td>
+                <td><a href="#" class='sauver'><i class="fas fa-save"></i></a></td>
             </tr>
         <% }) %>
     </table>
