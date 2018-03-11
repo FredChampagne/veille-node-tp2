@@ -20,14 +20,14 @@ if(typeof ordre != 'undefined'){
             <th><%= __('modifier') %></th>
         </tr>
         <tr class="gabarit">
-            <td><a href=""><i class="fas fa-user"></i></a></td>
+            <td class="profil"><a href=""><i class="fas fa-user"></i></a></td>
             <td class="prenom" contenteditable="true"></td>
             <td class="nom" contenteditable="true"></td>
             <td class="telephone" contenteditable="true"></td>
             <td class="courriel" contenteditable="true"></td>
             <td class="identifiant"></td>
-            <td><a href="#" class="supprimer"><i class="fas fa-trash"></i></a></td>
-            <td><a href="#" class='sauver'><i class="fas fa-save"></i></a></td>
+            <td><a href="#msgAjax" class="supprimer"><i class="fas fa-trash"></i></a></td>
+            <td><a href="#msgAjax" class='sauver'><i class="fas fa-save"></i></a></td>
         </tr>
         <% adresses.forEach(elm => {%>
             <tr>
@@ -37,8 +37,8 @@ if(typeof ordre != 'undefined'){
                 <td class="telephone" contenteditable="true"><%= elm.telephone %></td>
                 <td class="courriel" contenteditable="true"><%= elm.courriel %></td>
                 <td class="identifiant"><%= elm._id %></td>
-                <td><a href="#" class="supprimer"><i class="fas fa-trash"></i></a></td>
-                <td><a href="#" class='sauver'><i class="fas fa-save"></i></a></td>
+                <td><a href="#msgAjax" class="supprimer"><i class="fas fa-trash"></i></a></td>
+                <td><a href="#msgAjax" class='sauver'><i class="fas fa-save"></i></a></td>
             </tr>
         <% }) %>
     </table>
