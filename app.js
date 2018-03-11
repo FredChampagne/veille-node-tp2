@@ -121,8 +121,21 @@ app.post('/ajouter-ajax', (req, res) => {
 		res.send({
 			oNouveau,
 			id: resultat.ops[0]._id,
-			msg: oNouveau.prenom + " " + oNouveau.nom + " a été correctement ajouté"
+			msg: oNouveau.prenom + " " + oNouveau.nom + " a été correctement ajouté",
+			membreVide:false
 		})
+	})
+});
+
+// Ajoute un membre vide
+app.post('/ajout-vide-ajax', (req, res) => {
+	db.collection('adresse').save(req.body, (err, resultat) => {
+		if (err) return console.log(err)
+		res.send({
+			id: resultat.ops[0]._id,
+			msg: "Un membre vide a été ajouté",
+			membreVide: true
+		});
 	})
 });
 

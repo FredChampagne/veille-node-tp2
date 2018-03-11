@@ -12,6 +12,10 @@
      // Gère le click sur le bouton qui permet d'ajouter un nouveau membre depuis le formulaire
      $(".form_ajout .bouton").on("click", requeteFormAjout);
 
+    // Gère le click sur le lien "Ajouter un membre vide"
+    $("#ajouterVide").on("click", requeteAjoutVide);
+     
+
 
 
     // Fonction qui envoie une requête AJAX pour supprimer le membre
@@ -62,7 +66,18 @@
             method: "POST",
             url: "/ajouter-ajax",
             data: $(this).closest('form').serialize()
-        }).done(formAjout);
+        }).done(ajouter);
+    }
+
+    // Fonction qui envoie une requête AJAX pour ajouter le membre créé à partir du formulaire
+    function requeteAjoutVide(e) {
+        // Ne pas se déplacer sur la page
+        e.preventDefault();
+        // Requête Ajax pour faire l'ajout simple
+        $.ajax({
+            method: "POST",
+            url: "/ajout-vide-ajax"
+        }).done(ajouter);
     }
 
     /**
@@ -89,7 +104,7 @@
      * Ajoute le membre créé dans l'affichage
      * @param {object} data Informations retournées (infos membre et msg)
      */
-    function formAjout(data) {
+    function ajouter(data) {
         // Affiche le message de réussite
         afficherMsg(data.msg);
         // Copie le gabarit, retire la classe gabarit
@@ -97,16 +112,20 @@
         let rangeMembre = $('tr.gabarit').clone();
         $(rangeMembre).removeClass("gabarit");
         $(rangeMembre).appendTo(".tableau tbody");
-        // Ajoute les différents champs
-        $(rangeMembre).find('.prenom').text(data.oNouveau.prenom);
-        $(rangeMembre).find('.nom').text(data.oNouveau.nom);
-        $(rangeMembre).find('.telephone').text(data.oNouveau.telephone);
-        $(rangeMembre).find('.courriel').text(data.oNouveau.courriel);
+        if(data.membreVide == false) {
+            // Ajoute les différents champs
+            $(rangeMembre).find('.prenom').text(data.oNouveau.prenom);
+            $(rangeMembre).find('.nom').text(data.oNouveau.nom);
+            $(rangeMembre).find('.telephone').text(data.oNouveau.telephone);
+            $(rangeMembre).find('.courriel').text(data.oNouveau.courriel);
+        }
         $(rangeMembre).find('.identifiant').text(data.id);
         $(rangeMembre).find('.profil a').attr("href", "/profil/" + data.id);
         // Se positionne au message
         $(document).scrollTo('#msgAjax');
     }
+
+
 
     function afficherMsg(msg) {
         $('#msgAjax').css("display","block");

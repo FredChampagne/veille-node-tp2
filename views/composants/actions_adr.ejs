@@ -4,6 +4,7 @@
     <ul>
         <li><a href='/vider'><i class="fas fa-trash"></i><%= __('navVider') %></a></li>
         <li><a href='/peupler'><i class="fas fa-users"></i><%= __('navPeupler') %></a></li>
+        <li><a id="ajouterVide" href='#'><i class="fas fa-user"></i><%= __('navAjouter') %></a></li>
     </ul>
     <form class='form_recherche' action="/rechercher" name='form_recherche' id='form_recherche' method="POST" >
         <input type="text" name="chaine" placeholder="<%= __('rechercherMembre') %>">
