@@ -1,17 +1,17 @@
-<h2><%= __('clavardage') %></h2>
+<h1><%= __('clavardage') %></h1>
 <section id="enregistrement">
-    <p>Veuillez vous enregistrer pour utiliser le chat</p>
-    <p id="erreur_enreg">* Veuillez entrer un nom *</p>
+    <p><%= __('enregChat') %></p>
+    <p id="erreur_enreg">* <%= __('entrerNom') %> *</p>
     <input type="text">
-    <button onclick="enregistrement()">Enregistrement</button>
+    <button onclick="enregistrement()"><%= __('enreg') %></button>
 </section>
 <section id="chat" style="display:none">
     <div id="log"></div>
     <table id="list_user">
         <thead>
             <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
+                <th><%= __('identifiant') %></th>
+                <th><%= __('nomSeul') %></th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,8 @@
     <table id="message">
         <thead>
             <tr>
-                <th>Utilisateur</th>
-                <th>Message</th>
+                <th><%= __('utilisateur') %></th>
+                <th><%= __('message') %></th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
         </tbody>
     </table>
     <div id="message_a_transmettre">
-        <textarea id="txtMessage"></textarea>
-        <button onclick="transmettre()">Transmettre</button>
+        <textarea id="txtMessage" placeholder="<%= __('votreTexte') %>"></textarea>
+        <button onclick="transmettre()"><%= __('transmettre') %></button>
     </div>
 </section>

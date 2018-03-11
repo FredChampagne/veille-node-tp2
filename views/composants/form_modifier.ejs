@@ -1,33 +1,33 @@
 <!-- Formulaire qui permet de modifier un membre sur sa page profil -->
-<h2>Éditer les informations</h2>
+<h2><%= __('editerInfo') %></h2>
 <form class='form_modif' action="/modifier" name='form_modif' id='form_modif' method="POST" >
     <input type = "hidden" name = "_id" value = "<%= membre._id %>"> 
     <div class="deux-colonnes">
         <div>
-            <label for="nom"> Prénom </label>
+            <label for="prenom"> <%= __('prenom') %> </label>
             <input type = "text" value="<%= membre.prenom %>" name = "prenom">
         </div>
         <div>
-            <label for="nom"> Nom </label>
+            <label for="nom"> <%= __('nom') %> </label>
             <input type = "text" value="<%= membre.nom %>" name = "nom">
         </div>
     </div>
     <div class="deux-colonnes">
         <div>
-            <label for="nom"> Ville </label>
+            <label for="ville"> <%= __('ville') %> </label>
             <input type = "text" value="<%= membre.ville %>" name = "ville">
         </div>
         <div>
-            <label for="nom"> Téléphone </label>
+            <label for="telephone"> <%= __('telephone') %> </label>
             <input type = "text" value="<%= membre.telephone %>" name = "telephone">
         </div>
     </div>
     <div class="solo">
-        <label for="nom"> Courriel </label>
+        <label for="nom"> <%= __('courriel') %> </label>
         <input type = "text" value="<%= membre.courriel %>" name = "courriel">
     </div>
     <div class="deux-colonnes boutons">
-        <input class="bouton" type="submit" value='Modifier'>
-        <a class="bouton" href="/detruire/<%= membre._id %>">Supprimer</a>
+        <input class="bouton" type="submit" value="<%= __('modifier') %>">
+        <a class="bouton" href="/detruire/<%= membre._id %>"><%= __('supprimer') %></a>
     </div>
 </form>

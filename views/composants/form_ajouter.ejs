@@ -1,32 +1,32 @@
-<h2>Ajouter un membre</h2>
+<h2><%= __('ajouterMembre') %></h2>
 <!-- Formulaire qui permet d'ajouter un membre -->
 <form class='form_ajout' action="/ajouter" name='form_ajout' id='form_ajout' method="POST" >
     <input type = "hidden" name = "_id" value = ""> 
     <div class="deux-colonnes">
         <div>
-            <label for="prenom">Prénom :*</label>
-            <input type = "text" placeholder="Prénom" name = "prenom" required>
+            <label for="prenom"><%= __('prenom') %> :*</label>
+            <input type = "text" placeholder="<%= __('prenom') %>" name = "prenom" required>
         </div>
         <div>
-            <label for="nom">Nom :*</label>
-            <input type = "text" placeholder="Nom" name = "nom" required> 
+            <label for="nom"><%= __('nom') %> :*</label>
+            <input type = "text" placeholder="<%= __('nom') %>" name = "nom" required> 
         </div>
     </div>
     <div class="deux-colonnes">
         <div>
-            <label for="ville">Ville :</label>
-            <input type = "text" placeholder="Ville" name = "ville">
+            <label for="ville"><%= __('ville') %> :</label>
+            <input type = "text" placeholder="<%= __('ville') %>" name = "ville">
         </div>
         <div>
-            <label for="nom">Téléphone :</label>
-            <input type = "text" placeholder="Téléphone" name = "telephone">
+            <label for="nom"><%= __('telephone') %> :</label>
+            <input type = "text" placeholder="<%= __('telephone') %>" name = "telephone">
         </div>
     </div>
     <div class="solo">
-        <label for="nom">Courriel :</label>
-        <input type = "text" placeholder="Courriel" name = "courriel">
+        <label for="nom"><%= __('courriel') %> :</label>
+        <input type = "text" placeholder="<%= __('courriel') %>" name = "courriel">
     </div>
     <div>
-        <input class="bouton" type="submit" value='Ajouter'>
+        <input class="bouton" type="submit" value="<%= __('ajouter') %>">
     </div>
 </form>
