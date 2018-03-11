@@ -90,6 +90,23 @@ app.post('/modifier', function (req, res) {
 	})
 });
 
+// Modifie un membre et l'affiche
+app.post('/modifier-ajax', function (req, res) {
+	let id = ObjectID(req.body.id)
+	let oModif = {
+		"_id": id, 
+		nom: req.body.nom,
+		prenom:req.body.prenom, 
+		ville:req.body.ville,
+		telephone:req.body.telephone,
+		courriel:req.body.courriel
+	};
+	db.collection('adresse').save(oModif, (err, resultat) => {
+		if (err) return console.log(err);
+		res.send(oModif.prenom + " " + oModif.nom + " a été correctement modifié");
+	})
+});
+
 // Ajoute un membre
 app.post('/ajouter', (req, res) => {
 	let oNouveau = {
@@ -102,7 +119,7 @@ app.post('/ajouter', (req, res) => {
 	db.collection('adresse').save(oNouveau, (err, resultat) => {
 		if (err) return console.log(err)
 		console.log('nouveau membre')
-		res.redirect('/list')
+		res.send({oNouveau,msg:"Le membre a été correctement ajouté"})
 	})
 });
 
@@ -139,7 +156,7 @@ app.post('/detruire-ajax', (req,res)=>{
     db.collection('adresse').findOneAndDelete({
         _id: id
     }, (err, resultat) => {
-        res.send(id);
+        res.send({id:id,msg:"Le membre a été correctement supprimé"});
     });
 });
 

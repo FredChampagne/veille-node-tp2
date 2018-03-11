@@ -41,8 +41,19 @@
 
     /**
      * Retire le membre supprimé de l'affichage
-     * @param {string} id Identifiant du membre supprimé
+     * @param {object} data Informations retournées (id et msg)
      */
-    function retirer(id) {
-        $("td:contains('"+id+"')").closest('tr').remove();
+    function retirer(data) {
+        $("td:contains('"+data.id+"')").closest('tr').remove();
+        $('#msgAjax').css("display","block");
+        $('#msgAjax').text(data.msg);
+    }
+
+    /**
+     * Met à jour le membre dans l'affichage
+     * @param {string} msg Message confirmant la modification
+     */
+    function modifier(msg) {
+        $('#msgAjax').css("display","block");
+        $('#msgAjax').text(msg);
     }
