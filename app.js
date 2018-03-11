@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const ObjectID = require('mongodb').ObjectID;
 const cookieParser = require('cookie-parser');
 const i18n = require("i18n");
+const $ = require('jQuery');
 const peupler = require("./mes_modules/peupler");
 
 // Permet d'ajouter la librairie socket.io

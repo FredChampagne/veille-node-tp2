@@ -16,15 +16,19 @@ if(typeof ordre != 'undefined'){
             <th><a href='/trier/telephone/<%= tri %>'><%= __('telephone') %></a></th>
             <th><a href='/trier/courriel/<%= tri %>'><%= __('courriel') %></a></th>
             <th><a href='/trier/id/<%= tri %>'>ID</a></th>
+            <th><%= __('supprimer') %></th>
+            <th><%= __('modifier') %></th>
         </tr>
         <% adresses.forEach(elm => {%>
             <tr>
                 <td><a href="/profil/<%= elm._id %>"><i class="fas fa-user"></i></a></td>
-                <td><%= elm.prenom %></td>
-                <td><%= elm.nom %></td>
-                <td><%= elm.telephone %></td>
-                <td><%= elm.courriel %></td>
+                <td contenteditable="true"><%= elm.prenom %></td>
+                <td contenteditable="true"><%= elm.nom %></td>
+                <td contenteditable="true"><%= elm.telephone %></td>
+                <td contenteditable="true"><%= elm.courriel %></td>
                 <td><%= elm._id %></td>
+                <td><a href="/detruire/<%= elm._id %>"><i class="fas fa-trash"></i></a></td>
+                <td><a class='sauver' href="#"><i class="fas fa-save"></i></a></td>
             </tr>
         <% }) %>
     </table>
