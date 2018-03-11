@@ -1,0 +1,25 @@
+/*Tableau des membres*/
+
+.conteneur-tableau {
+    overflow-x: auto;
+    .tableau {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+        td:first-child {
+            text-align: center;
+        }
+        td,
+        th {
+            border: 1px solid #aaa;
+            padding: 5px;
+            text-align: center;
+        }
+        .gabarit {
+            display: none;
+        }
+    }
+}

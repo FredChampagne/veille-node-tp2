@@ -32,7 +32,11 @@ app.use(i18n.init);
 app.use('/jquery', express.static('./node_modules/jquery/dist/'));
 let util = require("util");
 
-//////////////////////////////// ROUTES /////////////////////////////////
+////////////////////////////////////////////////////
+//                     ROUTES                     //
+////////////////////////////////////////////////////
+
+// Transfert vers la langue choisie
 app.get('/:locale(fr|en)', (req, res) => {
 	let locale = req.params.locale;
 	req.setLocale(req.params.locale);
@@ -48,11 +52,6 @@ app.get('/', (req, res) => {
 	}
 	res.render('accueil.ejs');
 })
-
-// Affichage du chat
-app.get('/chat', (req, res) => {
-	res.render('socket_vue.ejs')
-});
 
 // Affichage de la liste
 app.get('/list', (req, res) => {
@@ -72,9 +71,73 @@ app.get('/profil/:id', (req, res) => {
 	})
 })
 
-// Modifie un membre et l'affiche
+// Supprime un membre à partir du profil membre
+app.get('/detruire/:id', (req, res) => {
+	let id = req.params.id;
+	let critere = ObjectID(id);
+	db.collection('adresse').findOneAndDelete({ "_id": critere }, (err, resultat) => {
+		if (err) return console.log(err)
+		res.redirect('/list');
+	})
+});
+
+// Tri les adresses
+app.get('/trier/:cle/:ordre', (req, res) => {
+	let cle = req.params.cle
+	let ordre = (req.params.ordre == 'asc' ? 1 : -1)
+	let cursor = db.collection('adresse').find().sort(cle, ordre).toArray((err, resultat) => {
+		ordre = (ordre == 1 ? "desc" : "asc");
+		res.render('adresses.ejs', { adresses: resultat, ordre: ordre, cle: cle })
+	});
+});
+
+// Peuple la base de données de membres
+app.get('/peupler', (req, res) => {
+	let peupler = require('./mes_modules/peupler/');
+	let listeMembres = peupler();
+	db.collection('adresse').insert(listeMembres, (err, resultat) => {
+		if (err) return console.log(err)
+		listeMembres = [];
+		res.redirect('/list');
+	});
+})
+
+// Vide la base de données
+app.get('/vider', (req, res) => {
+	db.collection('adresse').drop((err, resultat) => {
+		if (err) return console.log(err)
+		res.redirect('/list');
+	});
+})
+
+// Recherche un membre
+app.post('/rechercher', (req, res) => {
+	let chaine = req.body.chaine;
+	let critere = { $regex: ".*" + chaine + ".*" }
+	let cursor = db.collection('adresse').find({
+		$or: [
+			{ "nom": critere },
+			{ "prenom": critere },
+			{ "telephone": critere },
+			{ "courriel": critere }
+		]
+	}).toArray((err, resultat) => {
+		if (err) return console.log(err)
+		res.render('adresses.ejs', { adresses: resultat });
+	})
+});
+
+// Affichage du clavardage
+app.get('/chat', (req, res) => {
+	res.render('socket_vue.ejs')
+});
+
+///////////////////////////
+// ROUTES UTILISANT AJAX //
+///////////////////////////
+
+// Modifie le profil d'un membre et l'affiche
 app.post('/modifier-profil-ajax', (req, res) => {
-	console.log(req.body);
 	let id = ObjectID(req.body['_id'])
 	let oModif = {
 		"_id": id,
@@ -86,7 +149,6 @@ app.post('/modifier-profil-ajax', (req, res) => {
 	};
 	db.collection('adresse').save(oModif, (err, resultat) => {
 		if (err) return console.log(err)
-		console.log('sauvegarder dans la BD')
 		res.send({
 			oModif,
 			msg: "Profil mis à jour"
@@ -94,8 +156,8 @@ app.post('/modifier-profil-ajax', (req, res) => {
 	})
 });
 
-// Modifie un membre et l'affiche
-app.post('/modifier-ajax', (req, res) => {
+// Modifie un membre du tableau et affiche un message
+app.post('/modifier-tab-ajax', (req, res) => {
 	let id = ObjectID(req.body.id)
 	let oModif = {
 		"_id": id,
@@ -111,7 +173,7 @@ app.post('/modifier-ajax', (req, res) => {
 	})
 });
 
-// Ajoute un membre
+// Ajoute un membre et l'affiche directement
 app.post('/ajouter-ajax', (req, res) => {
 	let oNouveau = {
 		nom: req.body.nom,
@@ -131,7 +193,7 @@ app.post('/ajouter-ajax', (req, res) => {
 	})
 });
 
-// Ajoute un membre vide
+// Ajoute un membre vide et l'affiche directement
 app.post('/ajout-vide-ajax', (req, res) => {
 	db.collection('adresse').save(req.body, (err, resultat) => {
 		if (err) return console.log(err)
@@ -143,34 +205,7 @@ app.post('/ajout-vide-ajax', (req, res) => {
 	})
 });
 
-// Recherche un membre
-app.post('/rechercher', (req, res) => {
-	let chaine = req.body.chaine;
-	let critere = { $regex: ".*" + chaine + ".*" }
-	let cursor = db.collection('adresse').find({
-		$or: [
-			{ "nom": critere },
-			{ "prenom": critere },
-			{ "telephone": critere },
-			{ "courriel": critere }
-		]
-	}).toArray((err, resultat) => {
-		if (err) return console.log(err)
-		res.render('adresses.ejs', { adresses: resultat });
-	})
-});
-
-// Supprime un membre à partir du profil membre
-app.get('/detruire/:id', (req, res) => {
-	let id = req.params.id;
-	let critere = ObjectID(id);
-	db.collection('adresse').findOneAndDelete({ "_id": critere }, (err, resultat) => {
-		if (err) return console.log(err)
-		res.redirect('/list');
-	})
-});
-
-// Supprime directement dans le tableau des membres et envoie l'id et un message
+// Supprime un membre dans le tableau des membres et envoie l'id et un message
 app.post('/detruire-ajax', (req, res) => {
 	let id = ObjectID(req.body.id);
 	let prenom = req.body.prenom;
@@ -183,36 +218,7 @@ app.post('/detruire-ajax', (req, res) => {
 	});
 });
 
-// Tri les adresses
-app.get('/trier/:cle/:ordre', (req, res) => {
-	let cle = req.params.cle
-	let ordre = (req.params.ordre == 'asc' ? 1 : -1)
-	let cursor = db.collection('adresse').find().sort(cle, ordre).toArray(function (err, resultat) {
-		ordre = (ordre == 1 ? "desc" : "asc");
-		res.render('adresses.ejs', { adresses: resultat, ordre: ordre, cle: cle })
-	});
-});
-
-// Peuple la base de données de membres
-app.get('/peupler', function (req, res) {
-	let peupler = require('./mes_modules/peupler/');
-	let listeMembres = peupler();
-	db.collection('adresse').insert(listeMembres, (err, resultat) => {
-		if (err) return console.log(err)
-		listeMembres = [];
-		res.redirect('/list');
-	});
-})
-
-// Vide la base de données
-app.get('/vider', (req, res) => {
-	db.collection('adresse').drop((err, resultat) => {
-		if (err) return console.log(err)
-		res.redirect('/list');
-	});
-})
-
-let db // letiable qui contiendra le lien sur la BD
+let db // Initialisation de la base de données
 // Connection à la BD
 MongoClient.connect('mongodb://127.0.0.1:27017', (err, database) => {
 	if (err) return console.log(err)

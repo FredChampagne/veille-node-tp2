@@ -1,0 +1,64 @@
+@import "variables.less";
+
+/*Entete*/
+
+.entete {
+    width: 100%;
+    height: @hauteurEntete;
+    background-color: #43516C;
+    .conteneur-entete {
+        height: 100%;
+        width: 85%;
+        margin: auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        nav {
+            ul {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                li:nth-child(even) {
+                    margin: 0 15px;
+                }
+                a {
+                    font-size: 18px;
+                    color: white;
+                    @media all and (max-width: 450px) {
+                        font-size: 14px;
+                    }
+                }
+            }
+            svg {
+                margin-right: 5px;
+            }
+        }
+        .titre {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            h1 {
+                display: inline-block;
+                font-size: 30px;
+                margin: 0;
+                color: white;
+                @media all and (max-width: 450px) {
+                    font-size: 24px;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
